@@ -1,0 +1,7 @@
+Changelog
+=========
+
+1.0.0 (2009-09-15)
+------------------
+
+* Initial release [andrea]

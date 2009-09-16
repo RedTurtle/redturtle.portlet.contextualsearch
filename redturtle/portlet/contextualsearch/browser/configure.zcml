@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="rer.regioneDigitale_types">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+  <browser:page
+       name="contextual_search"
+       template="contextual_search.pt"
+       permission="zope2.View"
+       for="*"
+       />
+	   
+</configure>
