@@ -6,8 +6,10 @@
     i18n_domain="redturtle.portlet.contextualsearch">
 
     <five:registerPackage package="." initialize=".initialize" />
-
-    <genericsetup:registerProfile
+  	
+	<include package=".browser" />
+    
+	<genericsetup:registerProfile
        name="default"
        title="Contextual Search Portlet"
        directory="profiles/default"
