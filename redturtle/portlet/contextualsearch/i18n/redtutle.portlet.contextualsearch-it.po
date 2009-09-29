@@ -21,13 +21,14 @@ msgstr "Titolo portlet"
 msgid "Insert the portlet title"
 msgstr "Inserisci il titolo della portlet"
 
-msgid "Enable Contextual Search"
-msgstr "Abilita la ricerca contestuale"
+msgid "Target folder"
+msgstr "Selezione cartella"
 
-msgid "Enables the Contextual search, which shows only results from the current position"
-msgstr "Abilita la ricerca contestuale, che permette di mostrare solo i risultati a partire dalla posizione corrente"
+msgid "Choose the folder to use for searches. If left blank, the search will use the current context as the starting folder"
+msgstr "Selezione la cartella da usare come partenza per le ricerche. Se si lasciai l campo vuoto, verra' usata la posizione corrente come cartella di partenza"
 
-msgid "Show advanced Search"
+
+msgid "hi_banana"
 msgstr "Mostra la ricerca avanzata"
 
 msgid "Enables the advanced search link"

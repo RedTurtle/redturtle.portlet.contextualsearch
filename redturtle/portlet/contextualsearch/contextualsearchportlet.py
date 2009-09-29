@@ -3,13 +3,14 @@ from zope.interface import implements
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets.search import ISearchPortlet,Renderer as baseRenderer,AddForm as BaseAddForm,EditForm as BaseEditForm
 from plone.app.portlets.portlets import base
+from plone.app.vocabularies.catalog import SearchableTextSourceBinder
+from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
 
 from zope import schema
 from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from redturtle.portlet.contextualsearch import ContextualSearchPortletMessageFactory as _
-
 
 from zope.component import getMultiAdapter
 
@@ -21,15 +22,17 @@ class IContextualSearchPortlet(ISearchPortlet):
     portletTitle = schema.TextLine(title=_(u"Portlet title"),
                                    description=_(u"Insert the portlet title"),
                                    required=False)
-    enableContextualsearch = schema.Bool(title=_(u"Enable Contextual Search"),
-                                         description=_(u"Enables the Contextual search, which shows only results from the current position"),
-                                         default = False,
-                                         required = False)
     
-    showAdvanced = schema.Bool(title=_(u"Show advanced Search"),
+    showAdvanced = schema.Bool(title=_(u"Enable advanced search"),
                                description = _(u"Enables the advanced search link"),
                                default = False,
                                required = False)
+    
+    searchFolder = schema.Choice(title=_(u"Target folder"),
+                                 required=False,
+                                 description=_(u"Choose the folder to use for searches. If left blank, the search will use the current context as the starting folder"),
+                                 source=SearchableTextSourceBinder({'is_folderish' : True},
+                                                                    default_query='path:'))
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -40,10 +43,10 @@ class Assignment(base.Assignment):
 
     implements(IContextualSearchPortlet)
 
-    def __init__(self,portletTitle='', enableLivesearch=True,enableContextualsearch=False,showAdvanced=False):
+    def __init__(self,portletTitle='', enableLivesearch=True,searchFolder='',showAdvanced=False):
         self.enableLivesearch=enableLivesearch
         self.portletTitle = portletTitle
-        self.enableContextualsearch = enableContextualsearch
+        self.searchFolder = searchFolder
         self.showAdvanced = showAdvanced
 
     @property
@@ -65,10 +68,14 @@ class Renderer(baseRenderer):
     def getPosition(self):
         """returns the actual position for the contextual search"""
         plone_view = getMultiAdapter((aq_inner(self.context), self.request), name='plone')
-        if plone_view.isDefaultPageInFolder():
-            return '/'.join(plone_view.getParentObject().getPhysicalPath())
+        if self.data.searchFolder:
+            root_path= '/'.join(self.context.portal_url.getPortalObject().getPhysicalPath())
+            return root_path+self.data.searchFolder
         else:
-            return '/'.join(self.context.getPhysicalPath())
+            if plone_view.isDefaultPageInFolder():
+                return '/'.join(plone_view.getParentObject().getPhysicalPath())
+            else:
+                return '/'.join(self.context.getPhysicalPath())
     
     def enable_advanced(self):
         """return the flag of advanced search"""
@@ -89,7 +96,8 @@ class AddForm(BaseAddForm):
     constructs the assignment that is being added.
     """
     form_fields = form.Fields(IContextualSearchPortlet)
-
+    form_fields['searchFolder'].custom_widget = UberSelectionWidget
+    
     def create(self, data):
         return Assignment(**data)
 
@@ -101,3 +109,4 @@ class EditForm(BaseEditForm):
     zope.formlib which fields to display.
     """
     form_fields = form.Fields(IContextualSearchPortlet)
+    form_fields['searchFolder'].custom_widget = UberSelectionWidget

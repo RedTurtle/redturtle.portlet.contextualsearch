@@ -6,7 +6,8 @@
  <portlet
    addview="redturtle.portlet.contextualsearch.ContextualSearchPortlet"
    title="Contextual Search Portlet"
-   description=""
-   />
+   description="">
+   <for interface="plone.app.portlets.interfaces.IColumn" /> 
+ </portlet>
 
 </portlets>

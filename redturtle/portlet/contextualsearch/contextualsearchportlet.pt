@@ -1,5 +1,5 @@
 <dl class="portlet portletSearch"
-    i18n:domain="plone">
+    i18n:domain="redturtle.portlet.contextualsearch">
 
   <dt class="portletHeader">
       <span class="portletTopLeft"></span>
@@ -24,8 +24,7 @@
               tal:attributes="value request/SearchableText|nothing;
                               class python:livesearch and 'inputLabel searchField portlet-search-gadget' or 'inputLabel searchField portlet-search-gadget-nols'"
               />
-		 <input name="position" type="hidden" tal:condition="view/data/enableContextualsearch"
-		  					   				  tal:attributes="value view/getPosition">
+		 <input name="position" type="hidden" tal:attributes="value view/getPosition">
 							   
           <input class="searchButton"
               type="submit"
