@@ -63,7 +63,8 @@ class Renderer(baseRenderer):
     
     def search_action(self):
         """call the search view"""
-        return '%s/contextual_search' % self.portal_url
+        url = '/'.join(self.context.portal_url.getPortalObject().getPhysicalPath())
+        return '%s/contextual_search' % url
     
     def getPosition(self):
         """returns the actual position for the contextual search"""
