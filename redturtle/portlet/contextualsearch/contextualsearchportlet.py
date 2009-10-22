@@ -52,7 +52,7 @@ class Assignment(base.Assignment):
     @property
     def title(self):
     
-        return "Contextual Search Portlet"
+        return "Contextual search portlet"
 
 
 class Renderer(baseRenderer):
