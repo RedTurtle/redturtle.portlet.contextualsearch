@@ -13,4 +13,9 @@
        for="*"
        />
 	   
+  <!-- Resource directory for stylesheets -->
+  <browser:resourceDirectory
+      name="redturtle.portlet.contextualsearch.stylesheets"
+      directory="stylesheets"
+      />
 </configure>

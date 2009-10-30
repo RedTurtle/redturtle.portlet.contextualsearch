@@ -19,7 +19,7 @@ from Acquisition import aq_inner
 class IContextualSearchPortlet(ISearchPortlet):
     """A portlet that allows contextual search and extend search portlet base
     """
-    portletTitle = schema.TextLine(title=_(u"Portlet title"),
+    portletTitle = schema.TextLine(title=_(u"portlet_title",default=u"Portlet title"),
                                    description=_(u"Insert the portlet title"),
                                    required=False)
     
@@ -63,7 +63,7 @@ class Renderer(baseRenderer):
     
     def search_action(self):
         """call the search view"""
-        url = '/'.join(self.context.portal_url.getPortalObject().getPhysicalPath())
+        url = self.context.absolute_url()
         return '%s/contextual_search' % url
     
     def getPosition(self):
@@ -88,6 +88,10 @@ class Renderer(baseRenderer):
             return self.data.portletTitle
         else:
             return "search"
+    
+    def search_form(self):
+        url = self.context.absolute_url()
+        return '%s/search_form_events' %url
 
 class AddForm(BaseAddForm):
     """Portlet add form.

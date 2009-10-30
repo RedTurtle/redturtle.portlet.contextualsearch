@@ -1,9 +1,10 @@
 Changelog
 =========
-1.0.1-SVN_UNRELEASED (2009-??-??)
+1.1.0-SVN_UNRELEASED (2009-10-30)
 ------------------
 
 * changed field of the portlet [andrea]
+* fixed livesearch with the context [andrea]
 
 1.0.0 (2009-09-15)
 ------------------
