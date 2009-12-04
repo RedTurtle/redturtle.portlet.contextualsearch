@@ -51,8 +51,10 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-    
-        return "Contextual search portlet"
+        title = "Contextual search portlet"
+        if self.data.portletTitle:
+            return title+": " + self.data.portletTitle
+        return title
 
 
 class Renderer(baseRenderer):
