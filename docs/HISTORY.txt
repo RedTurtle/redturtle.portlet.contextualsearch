@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.1 (2009-12-10)
+------------------
+
+* fixed wrong link in advanced search [andrea]
+
 1.2.0 (2009-11-12)
 ------------------
 

@@ -93,7 +93,7 @@ class Renderer(baseRenderer):
     
     def search_form(self):
         url = self.context.absolute_url()
-        return '%s/search_form_events' %url
+        return '%s/search_form' %url
 
 class AddForm(BaseAddForm):
     """Portlet add form.
