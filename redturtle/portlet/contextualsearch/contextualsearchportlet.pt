@@ -42,15 +42,16 @@
       </form>
       <div class="visualClear"><!-- --></div>
     </dd>
-    <dd class="portletFooter" tal:condition="view/enable_advanced">
-        <a href="#"
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+		<a href="#"
          class="tile"
+		 tal:condition="view/enable_advanced"
          tal:attributes="href view/search_form"
 		 i18n:domain="plone"
          i18n:translate="label_advanced_search">
         Advanced Search&hellip;
         </a>
-        <span class="portletBottomLeft"></span>
         <span class="portletBottomRight"></span>
     </dd>
 </dl>
