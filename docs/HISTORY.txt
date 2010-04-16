@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.3-SVN_UNRELEASED (2010-04-16)
+------------------
+
+* removed relevance in result view [andrea]
+
 1.2.2 (2010-02-16)
 ------------------
 
