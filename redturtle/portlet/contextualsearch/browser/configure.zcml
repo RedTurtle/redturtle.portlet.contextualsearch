@@ -6,12 +6,12 @@
   <include package="plone.app.contentmenu" />
 
   <!-- -*- extra stuff goes here -*- -->
-  <browser:page
+  <!--browser:page
        name="contextual_search"
        template="contextual_search.pt"
        permission="zope2.View"
        for="*"
-       />
+       /-->
 	   
   <!-- Resource directory for stylesheets -->
   <browser:resourceDirectory

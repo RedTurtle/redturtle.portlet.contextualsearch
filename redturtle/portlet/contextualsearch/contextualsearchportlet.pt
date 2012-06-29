@@ -1,10 +1,12 @@
 <dl class="portlet portletSearch"
-    i18n:domain="redturtle.portlet.contextualsearch">
+    i18n:domain="redturtle.portlet.contextualsearch"
+    tal:define="search_form_url view/search_form;
+                right_context view/getRightContext">
 
   <dt class="portletHeader">
       <span class="portletTopLeft"></span>
       <a class="tile"
-         tal:attributes="href view/search_form">
+         tal:attributes="href string:${right_context/absolute_url}/search_form">
          	<span tal:content="view/getPortletTitle"/>
 	  </a>
       <span class="portletTopRight"></span>
@@ -13,7 +15,7 @@
     <dd class="portletItem">
       <form name="searchform" action="search"
             tal:define="livesearch view/enable_livesearch;"
-            tal:attributes="action view/search_action">
+            tal:attributes="action string:${right_context/absolute_url}/search">
         <div class="LSBox">
           <input class="searchField inputLabel"
               name="SearchableText"
@@ -26,10 +28,8 @@
                               class python:livesearch and 'inputLabel searchField portlet-search-gadget' or 'inputLabel searchField portlet-search-gadget-nols'"
               />
 		 <input name="path" 
-		        type="checkbox" 
-				checked="checked" 
-				id="contextual_search_path"
-				tal:attributes="value view/getPosition">
+		        type="hidden" 
+				tal:attributes="value view/getPosition" />
           <input class="searchButton"
               type="submit"
               value="Search"
@@ -47,7 +47,7 @@
 		<a href="#"
          class="tile"
 		 tal:condition="view/enable_advanced"
-         tal:attributes="href view/search_form"
+         tal:attributes="href string:${right_context/absolute_url}/search_form"
 		 i18n:domain="plone"
          i18n:translate="label_advanced_search">
         Advanced Search&hellip;
