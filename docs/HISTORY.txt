@@ -6,6 +6,7 @@ Changelog
 
 * removed unused view [micecchi]
 * fixed portlet header url to search_form [micecchi]
+* added autoinclude [micecchi]
 
 1.2.2 (2010-02-16)
 ------------------
