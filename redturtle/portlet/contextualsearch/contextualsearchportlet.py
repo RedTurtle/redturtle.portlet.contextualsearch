@@ -23,11 +23,6 @@ class IContextualSearchPortlet(ISearchPortlet):
                                    description=_(u"Insert the portlet title"),
                                    required=False)
 
-    showAdvanced = schema.Bool(title=_(u"Enable advanced search"),
-                               description=_(u"Enables the advanced search link"),
-                               default=False,
-                               required=False)
-
     searchFolder = schema.Choice(title=_(u"Target folder"),
                                  required=False,
                                  description=_(u"Choose the folder to use for searches. If left blank, the search will use the current context as the starting folder"),
@@ -71,10 +66,6 @@ class Renderer(baseRenderer):
         else:
             folder = self.getRightContext()
             return '/'.join(folder.getPhysicalPath())
-
-    def enable_advanced(self):
-        """return the flag of advanced search"""
-        return self.data.showAdvanced
 
     def getPortletTitle(self):
         """return the portlet title"""
