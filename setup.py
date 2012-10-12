@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.0.1.dev0'
+version = '2.0.1'
 
 setup(name='redturtle.portlet.contextualsearch',
       version=version,
@@ -11,7 +11,8 @@ setup(name='redturtle.portlet.contextualsearch',
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
-        "Framework :: Plone :: 3.3",
+        "Framework :: Plone :: 4",
+        "Framework :: Plone :: 4.2",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
