@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#from Acquisition import aq_parent
 from plone.app.blocks import utils
 from plone.app.blocks.tiles import renderTiles
 from plone.app.standardtiles import PloneMessageFactory as _
@@ -10,12 +9,13 @@ from plone.tiles import Tile
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
 from repoze.xmliter.utils import getHTMLSerializer
-#from z3c.form import validator
 from zExceptions import Unauthorized
 from zope import schema
 from zope.browser.interfaces import IBrowserView
 from zope.component.hooks import getSite
-#from zope.interface import Invalid
+from plone.api import content
+from zope.component import getMultiAdapter
+from Acquisition import aq_inner
 
 
 def uuidToObject(uuid):
@@ -59,6 +59,13 @@ class CatalogSource(CatalogSourceBase):
 
 
 class IContextualSearchTile(model.Schema):
+    """Schema per la tile Contextual Search.
+    """
+
+    tile_title = schema.TextLine(
+        title=_(u"Titolo tile"),
+        required=True,
+    )
 
     content_uid = schema.Choice(
         title=_(u"Seleziona cartella"),
@@ -67,35 +74,9 @@ class IContextualSearchTile(model.Schema):
         source=CatalogSource(),
     )
 
-    show_title = schema.Bool(
-        title=_(u'Show content title'),
-        default=True
-    )
-
-    show_description = schema.Bool(
-        title=_(u'Show content description'),
-        default=True
-    )
-
-
-# class SameContentValidator(validator.SimpleFieldValidator):
-#     def validate(self, content_uid):
-#         super(SameContentValidator, self).validate(content_uid)
-#         context = aq_parent(self.context)  # default context is tile data
-#         if content_uid and IUUID(context, None) == content_uid:
-#             raise Invalid("You can not select the same content as "
-#                           "the page you are currently on.")
-
-
-# Register validator
-# validator.WidgetValidatorDiscriminators(
-#     SameContentValidator,
-#     field=IContextualSearchTile['content_uid']
-# )
-
 
 class ContextualSearchTile(Tile):
-    """Existing content tile
+    """Contextual Search tile
     """
 
     @property
@@ -173,3 +154,31 @@ class ContextualSearchTile(Tile):
                     ) or name.startswith(('_', 'im_', 'func_')):
             return Tile.__getattr__(self, name)
         return getattr(self.default_view, name)
+
+    # Altra robissima simpaticissima
+
+    def getPosition(self):
+        """returns the actual position for the contextual search"""
+        if self.data['content_uid']:
+            rightObject = content.get(UID=self.data['content_uid'])
+            root_path = '/'.join(rightObject.getPhysicalPath())
+            return root_path
+        else:
+            folder = self.getRightContext()
+            return '/'.join(folder.getPhysicalPath())
+
+    def getPortletTitle(self):
+        """return the portlet title"""
+        if self.data.portletTitle:
+            return self.data.portletTitle
+        else:
+            return "search"
+
+    def getRightContext(self):
+        """
+        """
+        plone_view = getMultiAdapter((aq_inner(self.context), self.request), name='plone')
+        if plone_view.isDefaultPageInFolder():
+            return plone_view.getParentObject()
+        else:
+            return self.context
