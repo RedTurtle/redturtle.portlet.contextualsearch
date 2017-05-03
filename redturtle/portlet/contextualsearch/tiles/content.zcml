@@ -16,6 +16,6 @@
         schema=".contextualsearchtile.IContextualSearchTile"
         template="templates/contextualsearch_view.pt"
         />
-    <adapter factory=".contextualsearchtile.SameContentValidator" />
+    <!-- <adapter factory=".contextualsearchtile.SameContentValidator" /> -->
 
 </configure>

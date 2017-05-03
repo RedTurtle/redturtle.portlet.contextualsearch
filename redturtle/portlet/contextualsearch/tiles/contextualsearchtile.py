@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_parent
+#from Acquisition import aq_parent
 from plone.app.blocks import utils
 from plone.app.blocks.tiles import renderTiles
 from plone.app.standardtiles import PloneMessageFactory as _
@@ -10,12 +10,12 @@ from plone.tiles import Tile
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
 from repoze.xmliter.utils import getHTMLSerializer
-from z3c.form import validator
+#from z3c.form import validator
 from zExceptions import Unauthorized
 from zope import schema
 from zope.browser.interfaces import IBrowserView
 from zope.component.hooks import getSite
-from zope.interface import Invalid
+#from zope.interface import Invalid
 
 
 def uuidToObject(uuid):
@@ -78,20 +78,20 @@ class IContextualSearchTile(model.Schema):
     )
 
 
-class SameContentValidator(validator.SimpleFieldValidator):
-    def validate(self, content_uid):
-        super(SameContentValidator, self).validate(content_uid)
-        context = aq_parent(self.context)  # default context is tile data
-        if content_uid and IUUID(context, None) == content_uid:
-            raise Invalid("You can not select the same content as "
-                          "the page you are currently on.")
+# class SameContentValidator(validator.SimpleFieldValidator):
+#     def validate(self, content_uid):
+#         super(SameContentValidator, self).validate(content_uid)
+#         context = aq_parent(self.context)  # default context is tile data
+#         if content_uid and IUUID(context, None) == content_uid:
+#             raise Invalid("You can not select the same content as "
+#                           "the page you are currently on.")
 
 
 # Register validator
-validator.WidgetValidatorDiscriminators(
-    SameContentValidator,
-    field=IContextualSearchTile['content_uid']
-)
+# validator.WidgetValidatorDiscriminators(
+#     SameContentValidator,
+#     field=IContextualSearchTile['content_uid']
+# )
 
 
 class ContextualSearchTile(Tile):
