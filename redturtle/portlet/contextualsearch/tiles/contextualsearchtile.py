@@ -70,7 +70,7 @@ class IContextualSearchTile(model.Schema):
     content_uid = schema.Choice(
         title=_(u"Seleziona cartella"),
         description=_(u"Seleziona la cartella da usare come partenza per le ricerche. Se si lascia il campo vuoto, verra' usata la posizione corrente come cartella di partenza."),
-        required=True,
+        required=False,
         source=CatalogSource(),
     )
 
