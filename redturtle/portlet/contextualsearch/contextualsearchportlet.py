@@ -57,9 +57,7 @@ class Renderer(baseRenderer):
     def getPosition(self):
         """returns the actual position for the contextual search"""
         if self.data.searchFolder:
-            #root_path = '/'.join(self.context.portal_url.getPortalObject().getPhysicalPath())
             rightObject = content.get(UID=self.data.searchFolder)
-            #return root_path + self.data.searchFolder
             root_path = '/'.join(rightObject.getPhysicalPath())
             return root_path
         else:
