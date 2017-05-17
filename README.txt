@@ -5,6 +5,12 @@ It's an extension of search portlet that allows search for items starting from a
 You can choose to search in the current path or in a selected folder.
 
 
+NEW FEATURE FOR PLONE 5
+=======================
+
+With a Mosaic view in Plone 5, you can add a contextual search tile.
+
+
 NOTE
 ====
 
