@@ -1,10 +1,10 @@
 Changelog
 =========
 
-2.0.2 (unreleased)
+2.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Support for Plone 5 [arsenico13]
 
 
 2.0.1 (2012-10-12)

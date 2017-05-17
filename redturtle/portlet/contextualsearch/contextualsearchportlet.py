@@ -2,13 +2,10 @@ from zope.interface import implements
 
 from plone.app.portlets.portlets.search import ISearchPortlet, Renderer as baseRenderer, AddForm as BaseAddForm, EditForm as BaseEditForm
 from plone.app.portlets.portlets import base
-from plone.app.vocabularies.catalog import SearchableTextSourceBinder
-from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
-
+from plone.api import content
 from zope import schema
-from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from plone.app.vocabularies.catalog import CatalogSource
 from redturtle.portlet.contextualsearch import ContextualSearchPortletMessageFactory as _
 
 from zope.component import getMultiAdapter
@@ -26,8 +23,7 @@ class IContextualSearchPortlet(ISearchPortlet):
     searchFolder = schema.Choice(title=_(u"Target folder"),
                                  required=False,
                                  description=_(u"Choose the folder to use for searches. If left blank, the search will use the current context as the starting folder"),
-                                 source=SearchableTextSourceBinder({'is_folderish': True},
-                                                                    default_query='path:'))
+                                 source=CatalogSource())
 
 
 class Assignment(base.Assignment):
@@ -61,8 +57,9 @@ class Renderer(baseRenderer):
     def getPosition(self):
         """returns the actual position for the contextual search"""
         if self.data.searchFolder:
-            root_path = '/'.join(self.context.portal_url.getPortalObject().getPhysicalPath())
-            return root_path + self.data.searchFolder
+            rightObject = content.get(UID=self.data.searchFolder)
+            root_path = '/'.join(rightObject.getPhysicalPath())
+            return root_path
         else:
             folder = self.getRightContext()
             return '/'.join(folder.getPhysicalPath())
@@ -91,8 +88,11 @@ class AddForm(BaseAddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IContextualSearchPortlet)
-    form_fields['searchFolder'].custom_widget = UberSelectionWidget
+
+    schema = IContextualSearchPortlet
+
+    def updateWidgets(self):
+        super(AddForm, self).updateWidgets()
 
     def create(self, data):
         return Assignment(**data)
@@ -104,5 +104,8 @@ class EditForm(BaseEditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IContextualSearchPortlet)
-    form_fields['searchFolder'].custom_widget = UberSelectionWidget
+
+    schema = IContextualSearchPortlet
+
+    def updateWidgets(self):
+        super(EditForm, self).updateWidgets()

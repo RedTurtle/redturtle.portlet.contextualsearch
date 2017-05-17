@@ -7,12 +7,13 @@
     i18n_domain="redturtle.portlet.contextualsearch">
 
     <five:registerPackage package="." initialize=".initialize" />
-  	
+
 	<i18n:registerTranslations directory="locales" />
-	
+
 	<include package=".browser" />
+    <include package=".tiles" />
     <include file="skins.zcml"/>
-	
+
 	<genericsetup:registerProfile
        name="default"
        title="Contextual search portlet"
