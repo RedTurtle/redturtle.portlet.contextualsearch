@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.0 (unreleased)
+2.1.0 (2017-09-13)
 ------------------
 
 - Support for Plone 5 [arsenico13]
