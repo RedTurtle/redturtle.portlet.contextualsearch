@@ -26,7 +26,7 @@ setup(name='redturtle.portlet.contextualsearch',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'plone.app.tiles',
       ],
       entry_points="""
       # -*- entry_points -*-

@@ -4,7 +4,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add uninstall profile and install mosaic configuration only if mosaic is present
+  [cekk]
 
 
 2.1.0 (2017-09-13)
