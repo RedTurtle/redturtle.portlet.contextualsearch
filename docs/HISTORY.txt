@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.1 (unreleased)
+2.1.1 (2018-01-05)
 ------------------
 
 - Add uninstall profile and install mosaic configuration only if mosaic is present
