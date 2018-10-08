@@ -4,7 +4,7 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Enhanced tile template [nzambello]
 
 
 2.1.1 (2018-01-05)
