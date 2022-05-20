@@ -25,7 +25,7 @@
 
   <genericsetup:registerProfile
        name="mosaic_support"
-       title="Contextual search portlet (moasic support)"
+       title="Contextual search portlet (mosaic support)"
        directory="profiles/mosaic_support"
        description="Add this tile to mosaic list."
        provides="Products.GenericSetup.interfaces.EXTENSION"

@@ -1,4 +1,4 @@
-from zope.interface import implements
+from zope.interface import implementer
 
 from plone.app.portlets.portlets.search import ISearchPortlet, Renderer as baseRenderer, AddForm as BaseAddForm, EditForm as BaseEditForm
 from plone.app.portlets.portlets import base
@@ -26,14 +26,13 @@ class IContextualSearchPortlet(ISearchPortlet):
                                  source=CatalogSource())
 
 
+@implementer(IContextualSearchPortlet)
 class Assignment(base.Assignment):
     """Portlet assignment.
 
     This is what is actually managed through the portlets UI and associated
     with columns.
     """
-
-    implements(IContextualSearchPortlet)
 
     def __init__(self, portletTitle='', enableLivesearch=True, searchFolder='', showAdvanced=False):
         self.enableLivesearch = enableLivesearch
