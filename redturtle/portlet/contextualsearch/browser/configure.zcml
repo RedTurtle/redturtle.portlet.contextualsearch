@@ -12,7 +12,7 @@
        permission="zope2.View"
        for="*"
        /-->
-	   
+
   <!-- Resource directory for stylesheets -->
   <browser:resourceDirectory
       name="redturtle.portlet.contextualsearch.stylesheets"

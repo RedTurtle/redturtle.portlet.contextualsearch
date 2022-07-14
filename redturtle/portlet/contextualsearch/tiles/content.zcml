@@ -5,6 +5,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="plone">
 
+    <include package="plone.tiles" file="meta.zcml" />
+
     <plone:tile
         name="redturtle.portlet.contextualsearch.tiles.contextualsearchtile"
         title="Contextual Search"
