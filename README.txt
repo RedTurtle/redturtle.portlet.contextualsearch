@@ -14,4 +14,6 @@ With a Mosaic view in Plone 5, you can add a contextual search tile.
 NOTE
 ====
 
-As of version 2.1.x, this product is specific for Plone 5. For Plone 4, use the branch `2.0.x`.
+For Plone >=5.2 use branch master.
+For Plone <5.2 use branch 2.1.x.
+For Plone 4 use the branch `2.0.x`.
